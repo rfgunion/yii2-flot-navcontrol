@@ -5,10 +5,10 @@ namespace dudonsky\navcontrol;
 /**
  * This is just an example.
  */
-class AutoloadExample extends \yii\base\Widget
+class NavControl extends \yii\base\Widget
 {
     public function run()
     {
-        return "Hello!";
+		NavControlAsset::register($this->getView());
     }
 }
