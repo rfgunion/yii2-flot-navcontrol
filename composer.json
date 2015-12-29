@@ -1,0 +1,21 @@
+{
+    "name": "dudonsky/yii2-flot-navcontrol",
+    "description": "Provides navigation controls overlaying flot widgets.  See http://zizhujy.com/JsLibs/NavigationControl",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension","flot","navigation control"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bob Gunion",
+            "email": "rfgunion@lbl.gov"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "dudonsky\\navcontrol\\": ""
+        }
+    }
+}
