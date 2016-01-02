@@ -103,28 +103,32 @@ have the css class 'icon' for you to hook.
 		// 2: top
 		// 3: content
 		// 4: style
-        var buttonTemplate = "<div class='{0}' style='box-sizing: border-box; position: absolute; left: {1}; top: {2}; height: 28px; width: 28px; border: solid 1px #666; padding: 0; line-height: 28px; border-radius: 5px; cursor: pointer; background-color: #f5f5f5; display: inline-block; text-align: center; -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.15); box-shadow: 0 0 4px rgba(0, 0, 0, 0.15); text-shadow: 1px 1px 5px rgba(100, 100, 100, 0.75);'><div><span class='icon' style='color: #666; vertical-align: baseline;{4}'>{3}</span></div></div>";
+		// 5: title
+        var buttonTemplate = "<div class='{0}' data-toggle='tooltip' title='{5}' style='box-sizing: border-box; position: absolute; left: {1}; top: {2}; height: 28px; width: 28px; border: solid 1px #666; padding: 0; line-height: 28px; border-radius: 5px; cursor: pointer; background-color: #f5f5f5; display: inline-block; text-align: center; -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.15); box-shadow: 0 0 4px rgba(0, 0, 0, 0.15); text-shadow: 1px 1px 5px rgba(100, 100, 100, 0.75);'><div><span class='icon' style='color: #666; vertical-align: baseline;{4}'>{3}</span></div></div>";
 
         var horizontalZoomin = buttonTemplate.format(
 			'zoom-in-horizontal',
 			offsets[0][0], 
 			offsets[0][1],
 			showContent ? '&#x2194;': '',
-			' font-size: larger!important;'
+			' font-size: larger!important;',
+			'Zoom in (horizontal)'
 		);
         var zoomin = buttonTemplate.format(
 			'zoom-in',
 			offsets[1][0], 
 			offsets[1][1],
 			showContent ? '+': '',
-			''
+			'',
+			'Zoom in (both axes)'
 		);
         var verticalZoomin = buttonTemplate.format(
 			'zoom-in-vertical',
 			offsets[2][0], 
 			offsets[2][1],
 			showContent ? '&#x2195;': '',
-			' font-size: larger!important;'
+			' font-size: larger!important;',
+			'Zoom in (vertical)'
 		);
 
         var home = buttonTemplate.format(
@@ -132,7 +136,8 @@ have the css class 'icon' for you to hook.
 			offsets[3][0], 
 			offsets[3][1],
 			showContent ? '⌂': '',
-			''
+			'',
+			'Reset zoom and pan'
 		);
 
         var horizontalZoomout = buttonTemplate.format(
@@ -140,21 +145,24 @@ have the css class 'icon' for you to hook.
 			offsets[4][0], 
 			offsets[4][1],
 			showContent ? '&#x2194;': '',
-			' font-size: larger!important;'
+			' font-size: larger!important;',
+			'Zoom out (horizontal)'
 		);
         var zoomout = buttonTemplate.format(
 			'zoom-out',
 			offsets[5][0], 
 			offsets[5][1],
 			showContent ? '-': '',
-			''
+			'',
+			'Zoom out (both axes)'
 		);
         var verticalZoomout = buttonTemplate.format(
 			'zoom-out-vertical',
 			offsets[6][0], 
 			offsets[6][1],
 			showContent ? '&#x2195;': '',
-			' font-size: larger!important;'
+			' font-size: larger!important;',
+			'Zoom out (vertical)'
 		);
 
         var panup = buttonTemplate.format(
@@ -162,7 +170,8 @@ have the css class 'icon' for you to hook.
 			offsets[7][0], 
 			offsets[7][1],
 			showContent ? '↑': '',
-			''
+			'',
+			'Pan up'
 		);
 
         var panright = buttonTemplate.format(
@@ -170,7 +179,8 @@ have the css class 'icon' for you to hook.
 			offsets[8][0], 
 			offsets[8][1],
 			showContent ? '→': '',
-			''
+			'',
+			'Pan right'
 		);
 
         var pandown = buttonTemplate.format(
@@ -178,7 +188,8 @@ have the css class 'icon' for you to hook.
 			offsets[9][0], 
 			offsets[9][1],
 			showContent ? '↓': '',
-			''
+			'',
+			'Pan down'
 		);
 
         var panleft = buttonTemplate.format(
@@ -186,7 +197,8 @@ have the css class 'icon' for you to hook.
 			offsets[10][0], 
 			offsets[10][1],
 			showContent ? '←': '',
-			''
+			'',
+			'Pan left'
 		);
 
         var whitebox = ""; // "<div class='navigation-control-placeholder' style='height: 28px; width: 28px; border: solid 1px transparent; margin-bottom: 1px; padding: 0; line-height: 28px; border-radius: 5px; vertical-align: middle; text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75); background-color: transparent; display: inline-block; text-align: center; -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.15); box-shadow: 0 0 4px rgba(0, 0, 0, 0); text-shadow: 1px 1px 5px rgba(100, 100, 100, 0.75);'></div>";
