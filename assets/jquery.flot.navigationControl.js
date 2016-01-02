@@ -60,32 +60,134 @@ have the css class 'icon' for you to hook.
         var options = plot.getOptions();
 
         var display = options.navigationControl.display || "none";
+		var layout = options.navigationControl.layout || "default";
 		var showContent = true;
 		if (options.navigationControl.showContent !== undefined) {
 			showContent = options.navigationControl.showContent;
 		}
 
+		var offsets = [
+			["0", "0"],				// zoom-in-horizontal
+			["29px", "0"],			// zoom-in
+			["58px", "0"],			// zoom-in-vertical
+			["29px", "58px"],		// home
+			["0", "116px"],			// zoom-out-horizontal
+			["29px", "116px"],		// zoom-out
+			["58px", "116px"],		// zoom-out-vertical
+			["29px", "29px"],		// pan-up
+			["58px", "58px"],		// pan-right
+			["29px", "87px"],		// pan-down
+			["0", "58px"]			// pan-left
+		];
+		if (layout === "horizontal") {
+			offsets = [
+				["58px", "14px"],				// zoom-in-horizontal
+				["203px", "14px"],			// zoom-in
+				["130px", "14px"],			// zoom-in-vertical
+				["0", "14px"],		// home
+				["87px", "14px"],			// zoom-out-horizontal
+				["232px", "14px"],		// zoom-out
+				["159px", "14px"],		// zoom-out-vertical
+				["319px", "0"],		// pan-up
+				["348px", "14px"],		// pan-right
+				["319px", "29px"],		// pan-down
+				["290px", "14px"]			// pan-left
+			];
+		}
+
         var control = "<div class='navigation-control' style='width: 0; height: 0; left: " + options.navigationControl.position.left + "; top: " + options.navigationControl.position.top + "; position: absolute; display: " + display + ";'>Control</div>";
 
+		// buttonTemplate parameters:
+		// 0: class
+		// 1: left
+		// 2: top
+		// 3: content
+		// 4: style
         var buttonTemplate = "<div class='{0}' style='box-sizing: border-box; position: absolute; left: {1}; top: {2}; height: 28px; width: 28px; border: solid 1px #666; padding: 0; line-height: 28px; border-radius: 5px; cursor: pointer; background-color: #f5f5f5; display: inline-block; text-align: center; -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.15); box-shadow: 0 0 4px rgba(0, 0, 0, 0.15); text-shadow: 1px 1px 5px rgba(100, 100, 100, 0.75);'><div><span class='icon' style='color: #666; vertical-align: baseline;{4}'>{3}</span></div></div>";
 
-        var horizontalZoomin = buttonTemplate.format('zoom-in-horizontal', '0', '0', showContent ? '&#x2194;': '', ' font-size: larger!important;');
-        var zoomin = buttonTemplate.format('zoom-in', '29px', '0', showContent ? '+': '', '');
-        var verticalZoomin = buttonTemplate.format('zoom-in-vertical', '58px', '0', showContent ? '&#x2195;': '', ' font-size: larger!important;');
+        var horizontalZoomin = buttonTemplate.format(
+			'zoom-in-horizontal',
+			offsets[0][0], 
+			offsets[0][1],
+			showContent ? '&#x2194;': '',
+			' font-size: larger!important;'
+		);
+        var zoomin = buttonTemplate.format(
+			'zoom-in',
+			offsets[1][0], 
+			offsets[1][1],
+			showContent ? '+': '',
+			''
+		);
+        var verticalZoomin = buttonTemplate.format(
+			'zoom-in-vertical',
+			offsets[2][0], 
+			offsets[2][1],
+			showContent ? '&#x2195;': '',
+			' font-size: larger!important;'
+		);
 
-        var home = buttonTemplate.format('zoom-home', '29px', '58px', showContent ? '⌂': '', '');
+        var home = buttonTemplate.format(
+			'zoom-home',
+			offsets[3][0], 
+			offsets[3][1],
+			showContent ? '⌂': '',
+			''
+		);
 
-        var horizontalZoomout = buttonTemplate.format('zoom-out-horizontal', '0', '116px', showContent ? '&#x2194;': '', ' font-size: larger!important;');
-        var zoomout = buttonTemplate.format('zoom-out', '29px', '116px', showContent ? '-': '', '');
-        var verticalZoomout = buttonTemplate.format('zoom-out-vertical', '58px', '116px', showContent ? '&#x2195;': '', ' font-size: larger!important;');
+        var horizontalZoomout = buttonTemplate.format(
+			'zoom-out-horizontal',
+			offsets[4][0], 
+			offsets[4][1],
+			showContent ? '&#x2194;': '',
+			' font-size: larger!important;'
+		);
+        var zoomout = buttonTemplate.format(
+			'zoom-out',
+			offsets[5][0], 
+			offsets[5][1],
+			showContent ? '-': '',
+			''
+		);
+        var verticalZoomout = buttonTemplate.format(
+			'zoom-out-vertical',
+			offsets[6][0], 
+			offsets[6][1],
+			showContent ? '&#x2195;': '',
+			' font-size: larger!important;'
+		);
 
-        var panup = buttonTemplate.format('pan-up', '29px', '29px', showContent ? '↑': '', '');
+        var panup = buttonTemplate.format(
+			'pan-up',
+			offsets[7][0], 
+			offsets[7][1],
+			showContent ? '↑': '',
+			''
+		);
 
-        var panright = buttonTemplate.format('pan-right', '58px', '58px', showContent ? '→': '', '');
+        var panright = buttonTemplate.format(
+			'pan-right',
+			offsets[8][0], 
+			offsets[8][1],
+			showContent ? '→': '',
+			''
+		);
 
-        var pandown = buttonTemplate.format('pan-down', '29px', '87px', showContent ? '↓': '', '');
+        var pandown = buttonTemplate.format(
+			'pan-down',
+			offsets[9][0], 
+			offsets[9][1],
+			showContent ? '↓': '',
+			''
+		);
 
-        var panleft = buttonTemplate.format('pan-left', '0', '58px', showContent ? '←': '', '');
+        var panleft = buttonTemplate.format(
+			'pan-left',
+			offsets[10][0], 
+			offsets[10][1],
+			showContent ? '←': '',
+			''
+		);
 
         var whitebox = ""; // "<div class='navigation-control-placeholder' style='height: 28px; width: 28px; border: solid 1px transparent; margin-bottom: 1px; padding: 0; line-height: 28px; border-radius: 5px; vertical-align: middle; text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75); background-color: transparent; display: inline-block; text-align: center; -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.15); box-shadow: 0 0 4px rgba(0, 0, 0, 0); text-shadow: 1px 1px 5px rgba(100, 100, 100, 0.75);'></div>";
 
